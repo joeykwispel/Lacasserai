@@ -10,7 +10,12 @@
         <div class="card" style="width: 18rem; margin-bottom:20px; margin-left:20px;">
             <div class="card-body">
                 <h4 class="card-title">kamer: {{ kamer }}</h4>
-                {# <img class="card-img" src={{kamer.ImageFile}}></img> #}
+                {% for image in images %}
+                    {% if image.kamer == kamer %}
+                        <img class="card-img" src="data:image/jpg;base64,{{ image.imageFile }}"></img>
+                        <p>{{ image.id }}</p>
+                    {% endif %}
+                {% endfor %}
                 <h5 class="card-text">Prijs: {{ kamer.prijs }}</h5>
             </div>
         </div>

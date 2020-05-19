@@ -5,9 +5,6 @@ namespace App\Controller;
 use App\Entity\Kamer;
 use App\Form\KamerType;
 use App\Repository\KamerRepository;
-use App\Entity\Image;
-use App\Form\ImageType;
-use App\Repository\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,11 +18,10 @@ class KamerController extends AbstractController
     /**
      * @Route("/", name="kamer_index", methods={"GET"})
      */
-    public function index(KamerRepository $kamerRepository, ImageRepository $imageRepository): Response
+    public function index(KamerRepository $kamerRepository): Response
     {
         return $this->render('kamer/index.html.twig', [
             'kamers' => $kamerRepository->findAll(),
-            'images' => $imageRepository->findAll(),
         ]);
     }
 
