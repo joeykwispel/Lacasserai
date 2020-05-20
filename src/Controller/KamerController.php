@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Kamer;
 use App\Form\KamerType;
 use App\Repository\KamerRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/kamer")
+ *
+ * @IsGranted("ROLE_ADMIN")
+ *
  */
+
+
 class KamerController extends AbstractController
 {
     /**

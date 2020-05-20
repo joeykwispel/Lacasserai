@@ -12,7 +12,7 @@
                 <h4 class="card-title">kamer: {{ kamer }}</h4>
                 {% for image in images %}
                     {% if image.kamer == kamer %}
-                        <img class="card-img" src="data:image/jpg;base64,{{ image.imageFile }}"></img>
+                        <img class="card-img" src="{{ image.imagefile }}"></img>
                         <p>{{ image.id }}</p>
                     {% endif %}
                 {% endfor %}

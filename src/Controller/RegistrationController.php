@@ -37,9 +37,8 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             if ($form->isSubmitted() && $form->isValid()) {
-                return $this->redirect('results?'.$request->getQueryString());
+                return $this->redirect('login'.$request->getQueryString());
              }
-            // do anything else you need here, like send an email
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,

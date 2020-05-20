@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        <header>
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
             <div class="container">
 
@@ -15,7 +12,6 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
                             <a class="nav-link" href="/kamer">Kamers</a>
                         </li>
@@ -28,13 +24,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/image">Images</a>
                         </li>
-                        {% endif %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/register">Register</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/logout">Logout</a>
                         </li>
@@ -43,9 +32,5 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </div>
-    </body>
-</html>
+</div>
+{% endblock %}
