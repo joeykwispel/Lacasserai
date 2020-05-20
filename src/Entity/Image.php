@@ -23,7 +23,7 @@ class Image
     private $kamer;
 
     /**
-     * @ORM\Column(type="blob")
+     * @ORM\Column(type="text")
      */
     private $ImageFile;
 
@@ -54,5 +54,10 @@ class Image
         $this->ImageFile = $ImageFile;
 
         return $this;
+    }
+
+    public function __toString():string
+    {
+        return $this->getImageFile();
     }
 }

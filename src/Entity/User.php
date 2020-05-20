@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -35,6 +37,16 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reservering::class, mappedBy="User")
+     */
+    private $reserverings;
+
+    public function __construct()
+    {
+        $this->reserverings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -112,5 +124,41 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Reservering[]
+     */
+    public function getReserverings(): Collection
+    {
+        return $this->reserverings;
+    }
+
+    public function addReservering(Reservering $reservering): self
+    {
+        if (!$this->reserverings->contains($reservering)) {
+            $this->reserverings[] = $reservering;
+            $reservering->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservering(Reservering $reservering): self
+    {
+        if ($this->reserverings->contains($reservering)) {
+            $this->reserverings->removeElement($reservering);
+            // set the owning side to null (unless already changed)
+            if ($reservering->getUser() === $this) {
+                $reservering->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString():string
+    {
+        return $this->getUsername();
     }
 }

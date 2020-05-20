@@ -9,15 +9,15 @@
 {% for kamer in kamers %}
         <div class="card" style="width: 18rem; margin-bottom:20px; margin-left:20px;">
             <div class="card-body">
-                <h4 class="card-title">kamer: {{ kamer }}</h4>
+                <h4 class="card-title">{{ kamer.soort }}</h4>
                 {% for image in images %}
                     {% if image.kamer == kamer %}
-                        <img class="card-img" src="{{ image.imagefile }}"></img>
-                        <p>{{ image.id }}</p>
+                        <img class="card-img p-1" src="{{ image.imagefile }}"></img>
                     {% endif %}
                 {% endfor %}
-                <h5 class="card-text">Prijs: {{ kamer.prijs }}</h5>
+                <h5 class="card-text">Prijs: &euro;{{ kamer.prijs }}</h5>
             </div>
+        <button class="btn btn-primary" type="button"><a class="text-white " href="/reservering/new">Boek Nu</a></button>
         </div>
         {% endfor %}
 </wrapper>

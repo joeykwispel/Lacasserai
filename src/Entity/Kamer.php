@@ -39,10 +39,16 @@ class Kamer
      */
     private $Image;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Reservering::class, mappedBy="Kamer")
+     */
+    private $reserverings;
+
     public function __construct()
     {
         $this->Extras = new ArrayCollection();
         $this->Image = new ArrayCollection();
+        $this->reserverings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -134,5 +140,36 @@ class Kamer
     public function __toString()
     {
         return (string) $this->getId();
+    }
+
+    /**
+     * @return Collection|Reservering[]
+     */
+    public function getReserverings(): Collection
+    {
+        return $this->reserverings;
+    }
+
+    public function addReservering(Reservering $reservering): self
+    {
+        if (!$this->reserverings->contains($reservering)) {
+            $this->reserverings[] = $reservering;
+            $reservering->setKamer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservering(Reservering $reservering): self
+    {
+        if ($this->reserverings->contains($reservering)) {
+            $this->reserverings->removeElement($reservering);
+            // set the owning side to null (unless already changed)
+            if ($reservering->getKamer() === $this) {
+                $reservering->setKamer(null);
+            }
+        }
+
+        return $this;
     }
 }
